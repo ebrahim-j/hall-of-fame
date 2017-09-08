@@ -29,6 +29,17 @@ def get_user_handle(email):
     user_obj = get_user_object(email)
     return user_obj['name']
 
-# print(get_user_object('_ @ _ .com'))
-# print(get_user_image(24, '_ @ _ .com'))
-# print(get_user_handle('_ @ _ .com'))
+def get_first_name(email):
+    user_obj = get_user_object(email)
+    return user_obj['profile']['first_name']
+
+def get_last_name(email):
+    user_obj = get_user_object(email)
+    return user_obj['profile']['last_name']
+
+
+print(get_user_object('annette.odhiambo@andela.com'))
+print(get_user_image(24, 'annette.odhiambo@andela.com'))
+print(get_user_handle('annette.odhiambo@andela.com'))
+print(get_first_name('annette.odhiambo@andela.com'))
+print(get_last_name('annette.odhiambo@andela.com'))

@@ -7,11 +7,11 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
+# # try:
+#     import argparse
+#     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+# except ImportError:
+#     flags = None
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
@@ -92,7 +92,5 @@ def get_hobbies():
     hobbies = []
     for cohort in results:
         for fellow in cohort:
-            hobbies.append(fellow[1])
+            hobbies.append(fellow[2])
     return hobbies
-
-print(get_hobbies())

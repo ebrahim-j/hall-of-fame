@@ -51,30 +51,48 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def main():
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
-                    'version=v4')
-    service = discovery.build('sheets', 'v4', http=http,
-                              discoveryServiceUrl=discoveryUrl)
+credentials = get_credentials()
+http = credentials.authorize(httplib2.Http())
+discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
+                'version=v4')
+service = discovery.build('sheets', 'v4', http=http,
+                            discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1RRBsu9-3Pyb_0IepSQ0tfsUvAuHnchY7e867Tsj92hQ'
-    for cohort in COHORTS:
-        cohort_row = []
-        rangeName = cohort + '!A5:C'
-        result = service.spreadsheets().values().get(
-            spreadsheetId=spreadsheetId, range=rangeName).execute()
-        values = result.get('values', [])
+spreadsheetId = '1RRBsu9-3Pyb_0IepSQ0tfsUvAuHnchY7e867Tsj92hQ'
+for cohort in COHORTS:
+    cohort_row = []
+    rangeName = cohort + '!A5:C'
+    result = service.spreadsheets().values().get(
+        spreadsheetId=spreadsheetId, range=rangeName).execute()
+    values = result.get('values', [])
 
-        if not values:
-            print('No data found.')
-        else:
-            for row in values:
-                cohort_row.append(row)
-        results.append(cohort_row)
-        cohort_row = []
-    print(results[9])
+    if not values:
+        print('No data found.')
+    else:
+        for row in values:
+            cohort_row.append(row)
+    results.append(cohort_row)
+    cohort_row = []
 
-if __name__ == '__main__':
-    main()
+def get_emails():
+    emails = []
+    for cohort in results:
+        for fellow in cohort:
+            emails.append(fellow[0])
+    return emails
+
+def get_interests():
+    interests = []
+    for cohort in results:
+        for fellow in cohort:
+            interests.append(fellow[1])
+    return interests
+
+def get_hobbies():
+    hobbies = []
+    for cohort in results:
+        for fellow in cohort:
+            hobbies.append(fellow[1])
+    return hobbies
+
+print(get_hobbies())

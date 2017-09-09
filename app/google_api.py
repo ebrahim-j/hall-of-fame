@@ -1,6 +1,7 @@
 from __future__ import print_function
 import httplib2
 import os
+import logging
 
 from apiclient import discovery
 from oauth2client import client
@@ -48,7 +49,7 @@ def get_credentials():
             credentials = tools.run_flow(flow, store, flags)
         else: # Needed only for compatibility with Python 2.6
             credentials = tools.run(flow, store)
-        print('Storing credentials to ' + credential_path)
+        logging.info('Storing credentials to ' + credential_path)
     return credentials
 
 credentials = get_credentials()
@@ -67,7 +68,7 @@ for cohort in COHORTS:
     values = result.get('values', [])
 
     if not values:
-        print('No data found.')
+        logging.info('No data found.')
     else:
         for row in values:
             cohort_row.append(row)
@@ -85,12 +86,18 @@ def get_interests():
     interests = []
     for cohort in results:
         for fellow in cohort:
-            interests.append(fellow[1])
+            if fellow[1]:
+                interests.append(fellow[1])
+            else:
+                interests.append("Nill")
     return interests
 
 def get_hobbies():
     hobbies = []
     for cohort in results:
         for fellow in cohort:
-            hobbies.append(fellow[2])
+            if fellow[2]:
+                hobbies.append(fellow[2])
+            else:
+                hobbies.append("Nill")
     return hobbies

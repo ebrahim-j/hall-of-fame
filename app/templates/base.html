@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Hall of Fame - Andela</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  </head>
+  <body>
+    <header>
+      <nav class="blue darken-3" role="navigation">
+        <div class="nav-wrapper container">
+          <a id="logo-container" href="#" class="brand-logo">
+            <i class="left"><img src="http://lv.andela.com/images/logo-white.png" style="height: 60px;"/></i>
+            <span style="padding-left: 50px;">Hall of Fame</span>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">Fellow Staff</a></li>
+            <li><a href="/signin" onclick="signOut();">Sign Out</a></li>
+          </ul>
+          <ul id="nav-mobile" class="side-nav">
+            <li><a href="#">Fellow Staff</a></li>
+            <li><a href="/signin" onclick="signOut();">Sign Out</a></li>
+          </ul>
+          <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col m3" style="font-size: 10px;" style="overflow-x: scroll; overflow-y: scroll; height: 100%;">
+            <ul class="collection">
+              {% for andelan in andelans %}
+              <li class="collection-item avatar">
+                <a href="/dashboard/{{ andelan.email }}" class="black-text">
+                  <img src="{{ andelan.image_url }}" alt="fellow_staff" class="circle">
+                  <span class="title" style="font-size: 12px; font-weight: bold;">
+                  {{ andelan.firstname + " " +andelan.lastname }}
+                  </span>
+                  <p>Cohort No, Region.<br>
+                     Software Developer
+                  </p>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col m9">
+          {% block selected_profile %}
+          {% endblock %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="page-footer white">
+      <div class="container">
+      </div>
+      <div class="footer-copyright">
+        <div class="container black-text">
+        Hack4Culture: <a class="blue-text" href="http://andela.com">This is Andela!</a>
+        </div>
+      </div>
+    </footer>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> 
+    <!-- Google Auth SignOut Script -->
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
+  </body>
+</html>

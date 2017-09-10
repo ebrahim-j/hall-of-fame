@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block selected_profile %}
+<div class="card">
+	<div class="card-image">
+	  <img src="{{ andelan.image_url }}">
+	  <span class="card-title">
+	  	{{ andelan.firstname + " " + andelan.lastname + " - Software Developer" }}
+	  </span>
+	</div>
+	<div class="card-content">
+	  <p class="interesting_things">
+	    {{ profile.interesting_things }}
+	  </p>
+	  <br>
+	  <p class="hobbies">
+	    <strong>Hobbies: </strong>
+	    {{ profile.hobbies }}
+	  </p>
+	</div>
+	<div class="card-action blue-text">
+	  <a href="https://andela.slack.com/messages/@{{andelan.slack_username}}/" target="_blank">Chat on Slack</a>
+	  <a href="https://lenken.andela.com/requests" target="_blank">Request for Mentorship</a>
+	</div>
+</div>
+{% endblock %}

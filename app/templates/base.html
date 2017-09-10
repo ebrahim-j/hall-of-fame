@@ -19,11 +19,11 @@
           </a>
           <ul class="right hide-on-med-and-down">
             <li><a href="#">Fellow Staff</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="/signin" onclick="signOut();">Sign Out</a></li>
           </ul>
-
           <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
+            <li><a href="#">Fellow Staff</a></li>
+            <li><a href="/signin" onclick="signOut();">Sign Out</a></li>
           </ul>
           <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
@@ -87,5 +87,14 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> 
+    <!-- Google Auth SignOut Script -->
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
   </body>
 </html>

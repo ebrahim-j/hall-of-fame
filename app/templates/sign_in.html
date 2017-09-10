@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <meta name="google-signin-client_id" content="978368644549-nsg4k2n20inlhsrtci7i63kp0ch3g6b1.apps.googleusercontent.com"/>
     <title>Hall of Fame - Andela</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -27,7 +28,7 @@
             <h3 class="white-text center" style="font-family: sans-serif;">Hall of Fame</h3>
             <p class="white-text center">Because This Is Andela</p>
             <p class="center">
-              <img src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
+              <div class="g-signin2" data-onsuccess="onSignIn"></div>
             </p>
           </div>
         </div>
@@ -47,5 +48,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> 
+    <!-- Google Platform library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
   </body>
 </html>

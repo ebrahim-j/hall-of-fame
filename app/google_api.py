@@ -1,14 +1,13 @@
 from __future__ import print_function
 import httplib2
 import os
-import logging
 
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-# # try:
+# try:
 #     import argparse
 #     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
 # except ImportError:
@@ -42,14 +41,14 @@ def get_credentials():
 
     store = Storage(credential_path)
     credentials = store.get()
-    if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
-        flow.user_agent = APPLICATION_NAME
-        if flags:
-            credentials = tools.run_flow(flow, store, flags)
-        else: # Needed only for compatibility with Python 2.6
-            credentials = tools.run(flow, store)
-        logging.info('Storing credentials to ' + credential_path)
+    # if not credentials or credentials.invalid:
+    #     flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+    #     flow.user_agent = APPLICATION_NAME
+    #     if not flags:
+    #         credentials = tools.run_flow(flow, store, flags)
+    #     else: # Needed only for compatibility with Python 2.6
+    #         credentials = tools.run(flow, store)
+    #     print('Storing credentials to ' + credential_path)
     return credentials
 
 credentials = get_credentials()
@@ -63,12 +62,16 @@ spreadsheetId = '1RRBsu9-3Pyb_0IepSQ0tfsUvAuHnchY7e867Tsj92hQ'
 for cohort in COHORTS:
     cohort_row = []
     rangeName = cohort + '!A5:C'
+    cohort_no = cohort + '!A4'
     result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=rangeName).execute()
-    values = result.get('values', [])
+    result2 = service.spreadsheets().values().get(
+        spreadsheetId=spreadsheetId, range=cohort_no).execute()
+    values = result.get('values')
+    values.extend(result2.get('values'))
 
     if not values:
-        logging.info('No data found.')
+        print('No data found.')
     else:
         for row in values:
             cohort_row.append(row)
@@ -78,14 +81,17 @@ for cohort in COHORTS:
 def get_emails():
     emails = []
     for cohort in results:
+        cohort_no = cohort[-1]
         for fellow in cohort:
-            emails.append(fellow[0])
+            if fellow[0] != cohort_no[0]:
+                emails.append([fellow[0], cohort_no[0]])
+
     return emails
 
 def get_interests():
     interests = []
     for cohort in results:
-        for fellow in cohort:
+        for fellow in cohort[:-1]:
             if fellow[1]:
                 interests.append(fellow[1])
             else:
@@ -95,7 +101,7 @@ def get_interests():
 def get_hobbies():
     hobbies = []
     for cohort in results:
-        for fellow in cohort:
+        for fellow in cohort[:-1]:
             if fellow[2]:
                 hobbies.append(fellow[2])
             else:

@@ -67,7 +67,7 @@ for cohort in COHORTS:
         spreadsheetId=spreadsheetId, range=rangeName).execute()
     result2 = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=cohort_no).execute()
-    values = result.get('values', [])
+    values = result.get('values')
     values.extend(result2.get('values'))
 
     if not values:
@@ -91,13 +91,19 @@ def get_emails():
 def get_interests():
     interests = []
     for cohort in results:
-        for fellow in cohort:
-            interests.append(fellow[1])
+        for fellow in cohort[:-1]:
+            if fellow[1]:
+                interests.append(fellow[1])
+            else:
+                interests.append("Nill")
     return interests
 
 def get_hobbies():
     hobbies = []
     for cohort in results:
-        for fellow in cohort:
-            hobbies.append(fellow[2])
+        for fellow in cohort[:-1]:
+            if fellow[2]:
+                hobbies.append(fellow[2])
+            else:
+                hobbies.append("Nill")
     return hobbies

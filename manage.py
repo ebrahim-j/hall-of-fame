@@ -21,11 +21,12 @@ def initdb():
 def dropdb():
     db.drop_all()
     print("DB dropped")
-
+  
 @manager.command
 def populate():
     user = []
     for i, email in enumerate(google_api.get_emails()):
+
         user.append(fetch_from_slack.get_first_name(email[0]))
         user.append(fetch_from_slack.get_last_name(email[0]))
         user.append(fetch_from_slack.get_user_image(512, email[0]))
@@ -40,6 +41,7 @@ def populate():
 
         user = []
     print("DB populated")
+    
 @manager.command
 def migratedb():
         dropdb()

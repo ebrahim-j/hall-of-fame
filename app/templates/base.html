@@ -32,44 +32,26 @@
     <section>
       <div class="container">
         <div class="row">
-          <div class="col m3" style="font-size: 10px;">
+          <div class="col m3" style="font-size: 10px;" style="overflow-x: scroll; overflow-y: scroll; height: 100%;">
             <ul class="collection">
+              {% for andelan in andelans %}
               <li class="collection-item avatar">
-                <img src="http://materializecss.com/images/yuna.jpg" alt="fellow_staff" class="circle">
-                <span class="title" style="font-size: 12px; font-weight: bold;">Fellow Staff Name</span>
-                <p>Cohort No, Region.<br>
-                   Role/Contribution
-                </p>
+                <a href="/dashboard/{{ andelan.email }}" class="black-text">
+                  <img src="{{ andelan.image_url }}" alt="fellow_staff" class="circle">
+                  <span class="title" style="font-size: 12px; font-weight: bold;">
+                  {{ andelan.firstname + " " +andelan.lastname }}
+                  </span>
+                  <p>Cohort No, Region.<br>
+                     Software Developer
+                  </p>
+                </a>
               </li>
-              <li class="collection-item avatar">
-                <i class="material-icons circle">folder</i>
-                <span class="title" style="font-size: 12px; font-weight: bold;">James Lemayian</span>
-                <p>Cohort 20, Nairobi, Kenya.<br>
-                   Software Developer
-                </p>
-              </li>
+              {% endfor %}
             </ul>
           </div>
           <div class="col m9">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://avatars.slack-edge.com/2017-08-04/222225595731_af6a855bf6754f7c736e_1024.png">
-              <span class="card-title">Fellow Staff</span>
-            </div>
-            <div class="card-content">
-              <p class="interesting_things">
-                This is what I blah blah blah... Donec sollicitudin molestie malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur aliquet quam id dui posuere blandit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla porttitor accumsan tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
-              </p>
-              <br>
-              <p class="hobbies">
-                <strong>Interests: </strong>I love playing football and hanging out with my friends. Adventure and reading novels.
-              </p>
-            </div>
-            <div class="card-action blue-text">
-              <a href="#">Chat on Slack</a>
-              <a href="#">Request for Mentorship</a>
-            </div>
-          </div>
+          {% block selected_profile %}
+          {% endblock %}
           </div>
         </div>
       </div>

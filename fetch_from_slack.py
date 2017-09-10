@@ -1,5 +1,6 @@
 import os
 import requests
+import logging
 
 # Fetch user objects based on their emails
 req = requests.get(
@@ -16,8 +17,8 @@ def get_user_object(email):
             if email == user.get('profile').get('email'):
                 return user
         except KeyError:
-            print("User is bot")
-    print("User not found")
+            logging.info("User is bot")
+    logging.info("User not found")
 
 
 def get_user_image(px, email):

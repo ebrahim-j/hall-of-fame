@@ -15,10 +15,12 @@ manager = Manager(app)
 @manager.command
 def initdb():
     db.create_all()
+    print("DB initialised")
 
 @manager.command
 def dropdb():
     db.drop_all()
+    print("DB dropped")
 
 @manager.command
 def populate():
@@ -36,6 +38,7 @@ def populate():
         except:
             logging.info("Data invalid")
         user = []
+    print("DB populated")
 
 if __name__ == '__main__':
     manager.run()

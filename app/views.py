@@ -1,11 +1,11 @@
-from . import app
 from flask import render_template, redirect, url_for
+from . import app
 
 @app.route('/')
 @app.route('/signin')
 def signin():
     """ Signing in using Google Auth """
-    return render_template("signin.html")
+    return render_template("sign_in.html")
 
 @app.route('/dashboard')
 def dashboard():

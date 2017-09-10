@@ -25,3 +25,4 @@ def profile(email_address):
 	return render_template("profile.html",
 		andelan=andelan, profile=profile,
 		andelans=andelans, profiles=profiles)
+    return render_template("base.html")

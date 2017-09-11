@@ -19,6 +19,16 @@
 {% endfor %}
 {% endblock %}
 {% block selected_profile %}
+{% if andelan == None %}
+<div class="card">
+	<div class="card-image">
+	  <img src="https://i1.wp.com/a.slack-edge.com/7fa9/img/avatars/ava_0003-512.png?ssl=1">
+	  <span class="card-title">
+	  	This Andelan is not in the DB
+	  </span>
+	</div>
+</div>
+{% else %}
 <div class="card">
 	<div class="card-image">
 	  <img src="{{ andelan.image_url }}">
@@ -44,4 +54,5 @@
 	  <a href="https://andela.slack.com/messages/@{{andelan.slack_username}}/" target="_blank">Chat on Slack</a>
 	</div>
 </div>
+{% endif %}
 {% endblock %}

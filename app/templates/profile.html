@@ -1,4 +1,23 @@
 {% extends "base.html" %}
+{% block andelans_list %}
+{% for andelan in andelans %}
+<li class="collection-item avatar">
+<a href="/dashboard/{{ andelan.email }}" class="black-text">
+  <img src="{{ andelan.image_url }}" alt="fellow_staff" class="circle">
+  <span class="title" style="font-size: 12px; font-weight: bold;">
+  {% if andelan.firstname %}
+  {{ andelan.firstname + " " +andelan.lastname }}
+  {% else %}
+  {{ andelan.slack_username }}
+  {% endif %}
+  </span>
+  <p>{{ andelan.cohort }}<br>
+     Software Developer
+  </p>
+</a>
+</li>
+{% endfor %}
+{% endblock %}
 {% block selected_profile %}
 <div class="card">
 	<div class="card-image">

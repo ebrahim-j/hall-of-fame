@@ -50,5 +50,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> 
     <!-- Google Platform library -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Google Signin Script -->
+    <script type="text/javascript">
+      function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      // Redirect to dashboard
+      window.location.assign("/dashboard/"+profile.getEmail());
+      console.log('Script finished.')
+
+    }
+    </script>
   </body>
 </html>
